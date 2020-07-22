@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game With Me | Play With Your Favourite Stars</title>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous"
+  />
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+    <% if(alerts.error){%> <% alerts.error.forEach(message => {%>
+        <div class="alert alert-danger mb-0">
+          <%= message %>
+        </div>
+        <%}) } %> <% if(alerts.success){%> <% alerts.success.forEach(message => {%>
+        <div class="alert alert-success mb-0">
+          <%= message %>
+        </div>
+        <%}) } %>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/">
+            <img src="/img/Logo_Final_Wide.png" height="40" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+              </li>
+              <li class="nav-item dropdown">
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Games</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/">All Games</a>
+                  <a class="dropdown-item" href="/game/apexLegend">Apex Legend</a>
+                  <a class="dropdown-item" href="/game/csgo">CSGO</a>
+                  <a class="dropdown-item" href="/game/dota2">Dota2</a>
+                  <a class="dropdown-item" href="/game/minecraft">Minecraft</a>
+              </li>
+              <% if(currentUser){%>
+              <li class="nav-item">
+                <a class="nav-link" href="/account/<%= currentUser._id %>">Welcome <%= currentUser.userName%> </a>
+              </li>
+              <% } %>
+            </ul>
+            <ul class="nav justify-content-end">
+              <% if(!currentUser || currentUser.isUser){%>
+              <li class="nav-item">
+                <a class="nav-link" href="/partner/signup">Join as Partner</a>
+              </li>
+              <% } %>
+              <% if(currentUser){%>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/logout">Logout</a>
+              </li>
+              <% }else { %>
+                <li class="nav-item dropdown">
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Log In</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/auth/partnerlogin">As Partner</a>
+                    <a class="dropdown-item" href="/auth/userlogin">As User</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signup">Sign Up</a>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+        </nav>
+    <%- body %>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="container mt-3">
+    <h2>New Partner</h2>
+  
+    <form action="/partner/signup" method="post">
+        <div>
+            <label>Username</label>
+            <input name="userName" placeholder="UserName1234" />
+        </div>        
+        <div>
+            <label>IGN</label>
+            <input name="ign" placeholder="In-Game Name" />
+        </div>
+        <div>
+            <label>Email</label>
+            <input name="email" type="email" placeholder="john.doe@email.com" />
+        </div>
+        <div>
+            <label>Password</label>
+            <input name="password" type="password" placeholder="******" />
+        </div>
+        <div>
+        <label>Game</label>
+            <input name="game" type="radio" value="dota2" /> Dota2
+            <input name="game" type="radio" value="csgo" /> CS:GO
+            <input name="game" type="radio" value="minecraft" /> Minecraft
+            <input name="game" type="radio" value="apexLegend" /> Apex Legend
+        </div>
+        <div>
+            <label>Rank</label>
+            <input name="rank" placeholder="Global Elite" />
+        </div>
+        <div>
+            <label>Description</label>
+            <input name="description" placeholder="I am a cool guy :D" />
+        </div> 
+        <div>
+            <label>Cost</label>
+            <input name="cost" type="number" placeholder="$$ per hour" />
+        </div>
+        <button type="submit">Welcome to the Party</button>
+    </form>
+  </div>

@@ -1,0 +1,8 @@
+<div class="container mt-3">
+    <h2>New Partner</h2>
+  
+    <form enctype="multipart/form-data" action="/uploadphoto/<%= currentUser._id %>" method="post">
+            <input type="file" name="upload" accept="image/png , image/jpg"/><br/>
+            <input type="submit" value="Upload" />
+    </form>
+  </div>

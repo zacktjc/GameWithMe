@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="col-12">
+            <div class="card mb-3" style="max-width: 1000px">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                <img src="<%= account.img %>" class="card-img" alt="profile picture">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title"><%= account.userName %></h1>
+                    <hr>
+                    <h5><%= "Email : " %><%= account.email %></h5>
+                    <% if(currentUser.isPartner){%>
+                    <h5><%= "IGN : " %><%= account.ign %></h5>
+                    <h5><%= "Game : " %><%= account.game %></h5>
+                    <h5><%= "Rank : " %><%= account.rank %></h5>
+                    <h5><%= "Description : " %><%= account.description %></h5>
+                    <h5><%= "Cost : " %><%= "$" %><%= account.cost %><%= "/Hour" %></h5>
+                    <% } %>
+                    <a href="/account/edit/<%= currentUser._id %>" class="btn btn-primary">Edit</a>
+                    <form method="POST" action="/delete/<%= currentUser._id %>?_method=DELETE" style="display:inline">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                    <a href="/uploadphoto/<%= currentUser._id %>" class="btn btn-primary">Upload Photo</a>
+                </div>
+                </div>
+            </div>
+            </div>
+            </div>
+
+</div>

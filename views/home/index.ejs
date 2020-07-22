@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-8">   
+<div class="container">
+    <% if(!partners.length) {%>
+    <div class="alert alert-danger">
+      No Lists to show!
+    </div>
+    <% }else{ %>
+    <div class="row">
+        <div class="col-md-24">
+            <div class="row">
+            <% partners.forEach(partner => { %>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="<%= partner.img %>" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">
+                    <a href="/show/<%= partner._id %>"><%= partner.ign %></a>
+                    </h5>
+                    <p class="card-text text-capitalize">
+                    <%= partner.game %>
+                    </p>
+                    <p class="card-text text-capitalize">
+                        <%= "$" %><%= partner.cost %><%= "/Hour" %>
+                    </p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+                </div>
+            </div>
+            <% }) %>
+            </div>
+        </div>
+    </div>
+    <% }%>
+</div>
+</div>
+<div class="col">
+</div>
+</div>

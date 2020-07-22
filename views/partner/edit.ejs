@@ -1,0 +1,41 @@
+
+<h1 class="card-title"><%= account.userName %></h1>
+<hr>
+<h5><%= "Email : " %><%= account.email %></h5>
+<h5><%= "IGN : " %><%= account.ign %></h5>
+<h5><%= "Game : " %><%= account.game %></h5>
+<h5><%= "Rank : " %><%= account.rank %></h5>
+<h5><%= "Description : " %><%= account.description %></h5>
+<h5><%= "Cost : " %><%= "$" %><%= account.cost %><%= "/Hour" %></h5>
+
+<form action="/account/edit/<%= account._id %>" method="post">   
+    <div>
+        <label>Email</label>
+        <input name="email" type="email" placeholder="<%= account.email %>" />
+    </div>  
+    <div>
+        <label>IGN</label>
+        <input name="ign" placeholder="<%= account.ign %>" />
+    </div>
+    <div>
+    <label>Game</label>
+        <input name="game" type="radio" value="dota2" /> Dota2
+        <input name="game" type="radio" value="csgo" /> CS:GO
+        <input name="game" type="radio" value="minecraft" /> Minecraft
+        <input name="game" type="radio" value="apexLegend" /> Apex Legend
+    </div>
+    <div>
+        <label>Rank</label>
+        <input name="rank" placeholder="<%= account.rank %>" />
+    </div>
+    <div>
+        <label>Description</label>
+        <input name="description" placeholder="<%= account.description %>" />
+    </div> 
+    <div>
+        <label>Cost</label>
+        <input name="cost" type="number" placeholder="<%= account.cost %>" />
+    </div>
+
+    <button type="submit">Edit Partner</button>
+</form>
