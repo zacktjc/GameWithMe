@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Partner = require("../models/partner.model");
 const User = require("../models/user.model");
-const passport = require("../lib/passportConfig");
 const isLoggedIn = require("../lib/blockCheck");
 const { request } = require("express");
 const flash = require("connect-flash");
@@ -9,6 +8,9 @@ const cloudinary = require("cloudinary");
 var multer = require('multer');
 var upload = multer({ dest: './uploads/' });
 const methodOverride = require('method-override');
+const moment = require("moment");
+TimeAgo.addLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 router.use(methodOverride('_method'))
 
@@ -74,9 +76,12 @@ router.get("/show/:id", async (req, res) => {
     }
 });
 
+import TimeAgo from 'javascript-time-ago'
+
 router.get("/hire/:id", isLoggedIn, async (req, res) => {
     Partner.findById(req.params.id).then((partner) => {
       partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign);
+      console.log(timeAgo.format(new Date()));
       partner.save().then(()=>{
         res.redirect("/show/"+req.params.id);
       })

@@ -49,8 +49,12 @@ var partnerSchema = new mongoose.Schema({
         {
             type: String,
         }
-    ]
-});
+    ],
+    hiringTime: {
+        type: Date,
+    },
+}
+);
 
 partnerSchema.pre("save", function(next) {
   var user = this;

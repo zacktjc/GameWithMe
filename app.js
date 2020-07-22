@@ -13,7 +13,7 @@ require("dotenv").config();
 Connect to MongoDB 
 */
 mongoose.connect(
-    process.env.MONGOLIVE,
+    process.env.MONGODBURL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -25,6 +25,7 @@ mongoose.connect(
     }
 );
 
+app.use(express.static("public")); //look for static files in public folder
 app.use(express.urlencoded({ extended: true })); //collects form data
 app.set("view engine", "ejs"); //view engine setup
 app.use(expressLayouts); //Express EJS layout to make views into block

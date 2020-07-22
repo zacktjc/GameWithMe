@@ -3,7 +3,9 @@
             <div class="card mb-3" style="max-width: 1000px">
             <div class="row no-gutters">
                 <div class="col-md-4">
+                    <% if(currentUser.isPartner){%>
                 <img src="<%= account.img %>" class="card-img" alt="profile picture">
+                <% } %>
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
@@ -21,7 +23,9 @@
                     <form method="POST" action="/delete/<%= currentUser._id %>?_method=DELETE" style="display:inline">
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
+                    <% if(currentUser.isPartner){%>
                     <a href="/uploadphoto/<%= currentUser._id %>" class="btn btn-primary">Upload Photo</a>
+                    <% } %>
                 </div>
                 </div>
             </div>
