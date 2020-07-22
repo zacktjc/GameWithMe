@@ -189,7 +189,8 @@ router.post("/uploadphoto/:id", upload.single('upload'), isLoggedIn, async (req,
 // console.log(req.body);
 //console.log(req.file.path);
 cloudinary.uploader.upload(req.file.path, function (result) {
-  req.body.img = result.url;
+  console.log(result);
+  req.body.img = result.secure_url;
 Partner.findByIdAndUpdate(req.params.id, req.body)
 .then((partner) => {
   console.log(partner)

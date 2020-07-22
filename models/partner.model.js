@@ -43,6 +43,7 @@ var partnerSchema = new mongoose.Schema({
     },
     img: {
         type: String,
+        default: "https://res.cloudinary.com/dhuiru9bh/image/upload/v1595433119/146-1461473_default-profile-picture-transparent_o06jzv.png",
     },
     hiringHistory: [
         {
