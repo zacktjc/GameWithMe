@@ -7,7 +7,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const cloudinary = require("cloudinary");
 require("dotenv").config();
-
+var bodyParser = require('body-parser');
 /* 
 ===================
 Connect to MongoDB 
@@ -29,6 +29,8 @@ app.use(express.static("public")); //look for static files in public folder
 app.use(express.urlencoded({ extended: true })); //collects form data
 app.set("view engine", "ejs"); //view engine setup
 app.use(expressLayouts); //Express EJS layout to make views into block
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 //must come after above middleware and before routes
 //this creates a session which determines how long

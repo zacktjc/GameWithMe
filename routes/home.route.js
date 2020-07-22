@@ -9,8 +9,7 @@ var multer = require('multer');
 var upload = multer({ dest: './uploads/' });
 const methodOverride = require('method-override');
 const moment = require("moment");
-TimeAgo.addLocale(en)
-const timeAgo = new TimeAgo('en-US')
+var url = require('url');
 
 router.use(methodOverride('_method'))
 
@@ -76,17 +75,25 @@ router.get("/show/:id", async (req, res) => {
     }
 });
 
-import TimeAgo from 'javascript-time-ago'
-
 router.get("/hire/:id", isLoggedIn, async (req, res) => {
     Partner.findById(req.params.id).then((partner) => {
-      partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign);
-      console.log(timeAgo.format(new Date()));
+      partner.notification.unshift(req.user.userName + "wants to hire you");
+      console.log(moment().format('llll'));
       partner.save().then(()=>{
         res.redirect("/show/"+req.params.id);
       })
     });
 });
+
+// router.get("/hire/:id", isLoggedIn, async (req, res) => {
+//   Partner.findById(req.params.id).then((partner) => {
+//     partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign +  Array(173).fill('\xa0').join('') + moment().format('llll'));
+//     console.log(moment().format('llll'));
+//     partner.save().then(()=>{
+//       res.redirect("/show/"+req.params.id);
+//     })
+//   });
+// });
 
 router.get("/game/:gametitle", async (req, res) => {
   try {
@@ -96,6 +103,22 @@ router.get("/game/:gametitle", async (req, res) => {
     console.log(err);
   }
 });
+
+
+router.get("/search", async (req, res) => {
+  try {
+    var q = url.parse(req.url, true);
+    var search = q.query;
+    console.log(search);
+    let partners = await Partner.find({ ign : search.searchBar });
+    console.log("partner = " + partners)
+    res.render("home/index", { partners });
+  } catch(err) {
+    console.log(err);
+  }
+});
+
+
 
 //show account
 router.get("/account/:id",isLoggedIn, async (req, res) => {

@@ -50,10 +50,13 @@ var partnerSchema = new mongoose.Schema({
             type: String,
         }
     ],
-    hiringTime: {
-        type: Date,
-    },
-}
+    hiringHistory: [
+        {
+            type: String,
+        }
+    ],
+},
+    {timestamps:true}
 );
 
 partnerSchema.pre("save", function(next) {
