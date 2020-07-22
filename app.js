@@ -13,7 +13,7 @@ require("dotenv").config();
 Connect to MongoDB 
 */
 mongoose.connect(
-    process.env.MONGODBURL,
+    process.env.MONGOLIVE,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

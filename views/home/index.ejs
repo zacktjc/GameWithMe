@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container col-lg">
     <div class="row">
       <div class="col">
       </div>
       <div class="col-8">   
-<div class="container">
+<div class="container mt-4">
     <% if(!partners.length) {%>
     <div class="alert alert-danger">
       No Lists to show!
     </div>
     <% }else{ %>
     <div class="row">
-        <div class="col-md-24">
+        <div class="col">
             <div class="row">
             <% partners.forEach(partner => { %>
-            <div class="col-md-4 mb-3">
+            <div class="col-sm-4 mb-3">
                 <div class="card">
                     <img class="card-img-top" src="<%= partner.img %>" alt="Card image cap">
                     <div class="card-body">

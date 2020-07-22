@@ -76,7 +76,7 @@ router.get("/show/:id", async (req, res) => {
 
 router.get("/hire/:id", isLoggedIn, async (req, res) => {
     Partner.findById(req.params.id).then((partner) => {
-      partner.hiringHistory.push(req.user.userName + " Hired " + partner.ign);
+      partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign);
       partner.save().then(()=>{
         res.redirect("/show/"+req.params.id);
       })
