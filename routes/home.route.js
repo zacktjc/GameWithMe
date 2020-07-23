@@ -201,18 +201,6 @@ router.post("/account/edit/:id",isLoggedIn, (req,res) => {
   }
 })
 
-//approve partner
-router.post("/bePartner/:id",isLoggedIn, (req,res) => {
-  console.log(req.params.id);
-  Partner.findById(req.params.id, function(err, partner){
-    partner.isPartner = !partner.isPartner;
-    partner.save(function(err) {
-      if(err) {
-        console.log(err);
-      }
-    });
-  });
-})
 
 
 //delete account

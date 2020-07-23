@@ -57,10 +57,10 @@
               </li>
               <% if(currentUser){%>
               <li class="nav-item">
-                <a class="nav-link" href="/account/<%= currentUser._id %>">Welcome <%= currentUser.userName%> </a>
+                <a class="nav-link welcome" href="/account/<%= currentUser._id %>">Welcome <%= currentUser.userName%> </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/chatroom/<%= currentUser._id %>">Chat Room</a>
+                <a class="nav-link welcome" href="/chatroom/<%= currentUser._id %>">Chat Room</a>
                 </li>
               <% } %>
             </ul>

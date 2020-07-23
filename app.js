@@ -16,7 +16,7 @@ const { request } = require("http");
 Connect to MongoDB 
 */
 mongoose.connect(
-    process.env.MONGOLIVE,
+    process.env.MONGODBURL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
