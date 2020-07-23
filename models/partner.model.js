@@ -35,11 +35,15 @@ var partnerSchema = new mongoose.Schema({
     },
     isPartner: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     isUser: {
         type: Boolean,
         default: false,
+    },
+    isPending: {
+        type: Boolean,
+        default: true,
     },
     img: {
         type: String,
@@ -50,7 +54,7 @@ var partnerSchema = new mongoose.Schema({
             type: String,
         }
     ],
-    hiringHistory: [
+    testimonials: [
         {
             type: String,
         }

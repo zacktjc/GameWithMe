@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/main.css" />
+<link rel="icon" type="image/png" href="/img/favicon.png"/>
 </head>
 <body>
     <% if(alerts.error){%> <% alerts.error.forEach(message => {%>
@@ -27,7 +28,7 @@
         <%}) } %>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <a class="navbar-brand" href="/">
-            <img src="/img/gaminglogo.jpg" height="40" />
+            <img src="/img/gaminglogo.png" height="40" />
           </a>
           <button
             class="navbar-toggler"
@@ -42,7 +43,7 @@
           </button>
     
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mainNav mr-auto">
               <li class="nav-item active">
               </li>
               <li class="nav-item dropdown">
@@ -58,12 +59,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="/account/<%= currentUser._id %>">Welcome <%= currentUser.userName%> </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/chatroom/<%= currentUser._id %>">Chat Room</a>
+                </li>
               <% } %>
             </ul>
             <nav class="navbar navbar-light bg-light mr-auto">
                 <form action="/search" method="GET" class="form-inline"> 
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchBar">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2 searchBar " type="search" placeholder="Search" aria-label="Search" name="searchBar">
+                <button class="btn btn-outline-primary my-2 my-sm-0 searchButton" type="submit">Search</button>
               </form>
             </nav>
             <ul class="nav justify-content-end">
@@ -91,5 +95,7 @@
           </div>
         </nav>
     <%- body %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

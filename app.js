@@ -2,12 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 const passport = require("./lib/passportConfig");
 const session = require("express-session");
 const flash = require("connect-flash");
 const cloudinary = require("cloudinary");
 require("dotenv").config();
 var bodyParser = require('body-parser');
+const { request } = require("http");
 /* 
 ===================
 Connect to MongoDB 
@@ -49,6 +52,7 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
+
 //must be after sessions
 //passport initialization
 app.use(passport.initialize());
@@ -60,7 +64,6 @@ app.use(function(request, response, next) {
     // before every route, attach the flash messages and current user to res.locals
     response.locals.alerts = request.flash();
     response.locals.currentUser = request.user;
-    console.log(request.user);
     next();
 });
 
@@ -68,14 +71,45 @@ app.use(function(request, response, next) {
 app.use("/", require("./routes/home.route"));
 app.use("/partner", require("./routes/partner.route"));
 app.use("/auth", require("./routes/auth.route"));
+app.use("/chatroom", require("./routes/chatroom.route"));
 
 
 app.get("*", (req, res) => {
     res.send("does not exist");
 });
 
+let users = [];
+
+io.on("connection", (socket) => {
+
+//save the users that come in and emit to main.js 
+  socket.on('set user', (data, next) => {
+    
+    if(users.indexOf(data) !== -1){
+      next(false)
+
+    }else {
+      next(true) 
+
+      socket.username = data;
+
+      users.push(data);
+
+      io.emit('users', users);
+
+    }
+
+  })
+
+  socket.on("send message", (msg) => {
+    io.emit("chat message", {user : socket.username, message: msg}); //no longer sending string but send object 
+  });
+
+});
+
+
 
 //connect to port
-app.listen(process.env.PORT, () =>
+http.listen(process.env.PORT, () =>
   console.log(`connected to express on ${process.env.PORT}`)
 );

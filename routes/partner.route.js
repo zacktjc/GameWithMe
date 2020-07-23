@@ -10,7 +10,7 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
    // console.log(req.body);
     try {
-      let { userName, ign, email, password, game, rank, description, cost, isPartner, isUser} = req.body;
+      let { userName, ign, email, password, game, rank, description, cost, isPartner, isUser, isPending} = req.body;
 
       let partner = new Partner({
         userName,
@@ -22,7 +22,8 @@ router.post("/signup", async (req, res) => {
         description,
         cost,
         isPartner,
-        isUser
+        isUser,
+        isPending
       }); 
   
       let savedPartner = await partner.save();

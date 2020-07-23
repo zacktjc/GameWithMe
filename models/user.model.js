@@ -22,6 +22,10 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 userSchema.pre("save", function(next) {

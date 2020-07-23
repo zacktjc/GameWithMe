@@ -26,7 +26,7 @@
                 </p>
               </div>
               <form action="/hire/<%= partner._id %>" method="GET" class="ml-3 mb-2">
-                <button type="submit" class="btn btn-info">Hire!</button>
+                <button type="submit" class="btn btn-info" id="hireButton">Hire!</button>
               </form>
             </div>
           </div>
@@ -34,13 +34,52 @@
       </div>
       <hr>
       <h3 class="card-title ml-3">
-        Hiring History
+        Recent Hiring History
       </h3>
       <ul class="list-group mt-3">
-        <% partner.hiringHistory.forEach(hiring => { %>
         <li class="list-group-item">
-          <%= hiring %>
+          <%= partner.hiringHistory[0] %>
         </li>
-        <% }) %>
-      </div>
+        <li class="list-group-item">
+          <%= partner.hiringHistory[1] %>
+        </li>
+        <li class="list-group-item">
+          <%= partner.hiringHistory[2] %>
+        </li>
+        <li class="list-group-item">
+          <%= partner.hiringHistory[3] %>
+        </li>
+        <li class="list-group-item">
+          <%= partner.hiringHistory[4] %>
+        </li>
+        </ul>
+        <hr>
+        <h3 class="card-title ml-3">
+          Recent Testimonials
+        </h3>
+        <ul class="list-group mt-3">
+          <li class="list-group-item">
+            <%= partner.testimonials[0] %>
+          </li>
+          <li class="list-group-item">
+            <%= partner.testimonials[1] %>
+          </li>
+          <li class="list-group-item">
+            <%= partner.testimonials[2] %>
+          </li>
+          <li class="list-group-item">
+            <%= partner.testimonials[3] %>
+          </li>
+          <li class="list-group-item">
+            <%= partner.testimonials[4] %>
+          </li>
+          <br>
+          </ul>
+          <form action="/testimonial/<%= partner._id %>" method="GET" class="form-inline"> 
+            <input class="form-control mr-sm-5 searchBar" type="search" placeholder="Very Good" aria-label="Search" name="searchBar">
+            <button class="btn btn-outline-success my-1 my-sm-0 searchButton" type="submit">Submit Tesimonial</button>
+          </form>
+          <hr>
+          
+</div>
       

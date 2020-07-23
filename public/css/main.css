@@ -1,0 +1,26 @@
+body{
+    background-color: grey;
+}
+.searchBar  {
+    height: 30px;
+}
+
+.searchButton {
+    height: 30px;
+    padding: 3px;
+}
+
+.testimonialsBox {
+    width: 1000px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+  }
+
+.messageContainer {
+    width: 200px;
+    border: 2px solid black;
+    margin: 20px;
+}

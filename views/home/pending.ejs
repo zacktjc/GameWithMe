@@ -1,0 +1,48 @@
+<div class="container col-lg">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-8">   
+<div class="container mt-4">
+    <% if(!partners.length) {%>
+    <div class="alert alert-danger">
+      No Lists to show!
+    </div>
+    <% }else{ %>
+        <% if(currentUser.isAdmin) {%>
+            <h2>HI ADMIN</h2>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+            <% partners.forEach(partner => { %>
+            <div class="col-sm-4 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="<%= partner.img %>" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">
+                    <a href="/show/<%= partner._id %>"><%= partner.ign %></a>
+                    </h5>
+                    <p class="card-text text-capitalize">
+                    <%= partner.game %>
+                    </p>
+                    <p class="card-text text-capitalize">
+                        <%= "$" %><%= partner.cost %><%= "/Hour" %>
+                    </p>
+                    <a href="/bePartner/<%= currentUser._id %>" class="btn btn-primary">Approved!</a>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+                </div>
+            </div>
+            <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <% }%>
+
+</div>
+</div>
+<div class="col">
+</div>
+</div>

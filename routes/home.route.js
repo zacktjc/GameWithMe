@@ -17,11 +17,20 @@ router.use(methodOverride('_method'))
 
 router.get("/", async (req, res) => {
     try {
-      let partners = await Partner.find()
+      let partners = await Partner.find({isPartner : true});
       res.render("home/index", { partners });
     } catch(err) {
       console.log(err);
     }
+});
+
+router.get("/pending", isLoggedIn, async (req, res) => {
+  try {
+    let partners = await Partner.find({ isPending : true });
+    res.render("home/pending", { partners });
+  } catch(err) {
+    console.log(err);
+  }
 });
 
 router.get("/signup", (req, res) => {
@@ -37,7 +46,7 @@ router.get('/flash', function(req, res){
 router.post("/usersignup", async (req, res) => {
    // console.log(req.body);
     try {
-      let { userName, email, password, isPartner, isUser} = req.body;
+      let { userName, email, password, isPartner, isUser, isAdmin} = req.body;
   
       //hash password dont save password in plain text
       let user = new User({
@@ -46,6 +55,7 @@ router.post("/usersignup", async (req, res) => {
         password,
         isPartner,
         isUser,
+        isAdmin,
       }); 
   
       let savedUser = await user.save();
@@ -75,25 +85,36 @@ router.get("/show/:id", async (req, res) => {
     }
 });
 
+// router.get("/hire/:id", isLoggedIn, async (req, res) => {
+//     Partner.findById(req.params.id).then((partner) => {
+//       partner.notification.unshift(req.user.userName + "wants to hire you");
+//       console.log(moment().format('llll'));
+//       partner.save().then(()=>{
+//         res.redirect("/show/"+req.params.id);
+//       })
+//     });
+// });
+
 router.get("/hire/:id", isLoggedIn, async (req, res) => {
-    Partner.findById(req.params.id).then((partner) => {
-      partner.notification.unshift(req.user.userName + "wants to hire you");
-      console.log(moment().format('llll'));
-      partner.save().then(()=>{
-        res.redirect("/show/"+req.params.id);
-      })
-    });
+  Partner.findById(req.params.id).then((partner) => {
+    partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign + " " + moment().format('llll'));
+    console.log(moment().format('llll'));
+    partner.save().then(()=>{
+      res.redirect("/show/"+req.params.id);
+    })
+  });
 });
 
-// router.get("/hire/:id", isLoggedIn, async (req, res) => {
-//   Partner.findById(req.params.id).then((partner) => {
-//     partner.hiringHistory.unshift(req.user.userName + " Hired " + partner.ign +  Array(173).fill('\xa0').join('') + moment().format('llll'));
-//     console.log(moment().format('llll'));
-//     partner.save().then(()=>{
-//       res.redirect("/show/"+req.params.id);
-//     })
-//   });
-// });
+router.get("/testimonial/:id", isLoggedIn, async (req, res) => {
+  Partner.findById(req.params.id).then((partner) => {
+    var q = url.parse(req.url, true);
+    var search = q.query;
+    partner.testimonials.unshift(req.user.userName + " testimonial for " + partner.ign + " : " + search.searchBar);
+    partner.save().then(()=>{
+      res.redirect("/show/"+req.params.id);
+    })
+  });
+});
 
 router.get("/game/:gametitle", async (req, res) => {
   try {
@@ -179,6 +200,20 @@ router.post("/account/edit/:id",isLoggedIn, (req,res) => {
     })
   }
 })
+
+//approve partner
+router.post("/bePartner/:id",isLoggedIn, (req,res) => {
+  console.log(req.params.id);
+  Partner.findById(req.params.id, function(err, partner){
+    partner.isPartner = !partner.isPartner;
+    partner.save(function(err) {
+      if(err) {
+        console.log(err);
+      }
+    });
+  });
+})
+
 
 //delete account
 router.delete("/delete/:id",isLoggedIn, (req, res) => {
